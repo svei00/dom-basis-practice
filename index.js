@@ -76,6 +76,8 @@ h1Tag.appendChild(h1Node);
 // Creating the node
 parent.insertBefore(h1Tag, h2Tag);
 
+
+// Activity 2
 // Adding an Input before the  "Add Item" button
 // Creating the Input Element
 const inputElement = document.createElement("input");
@@ -122,3 +124,84 @@ while (contentDiv.firstChild) {
 buttonElement.onclick = function() {
     console.log("adding an element to the list");
 }
+
+// Activity 3
+// Create a Click Event that Will Add a LI element witha number.
+
+// Define the DIV content
+const divElement = document.getElementById("content");
+
+// We already created the button Element
+
+// Declaring the counter and initializing it
+let itemNumber = 1;
+
+// Creating the Event Listener with anonymous function
+buttonElement.addEventListener("click", function() {
+
+    // Check if ul element exists
+    let ulElement = divElement.querySelector("ul");
+
+    if(!ulElement) {
+        ulElement = document.createElement("ul");
+        divElement.appendChild(ulElement);
+    }
+
+    // Creating the li Element
+    const liElement = document.createElement("li");
+
+    // Setting up the text Item Number + Counter
+    liElement.textContent = `Item Number No. ${itemNumber}`;
+
+    // Incrementing the Element in each click
+    itemNumber++;
+
+    // Append the li element to the ul element
+    ulElement.appendChild(liElement);
+
+});
+
+// Inputs Manipulation
+
+// Getting the value from Input
+let input = document.getElementsByTagName('input')[0];
+console.log(input.value); //=> ""
+
+// Creating a Click Event for the button
+let sendButton = document.getElementById("send-btn");
+
+// Moving the input inside the function (optional) with Anonymous Function
+sendButton.onclick = function() {
+    // let input2 = document.getElementsByTagName("input")[0]; // or leave it as it is, outside. The zero is to get the first occurence
+    let input2 = document.getElementById("input2"); // or leave it as it is, outside
+    console.log(input2.value);
+}
+
+// Commands for Scrapping a Web Site
+
+// Getting all the Elements with a className
+let titles = document.getElementsByClassName('reactAppRoot');
+for (let i = 0; i < titles.length; i++) {
+    console.log(titles[i].innerHTML);
+  }
+
+// Getting all the titles ordered by its metric
+  let elems = document.getElementsByClassName('itemlist');
+
+  let articles = elems[0].children[0].getElementsByClassName('athing');
+  
+  let pointsElement;
+  let articlesArray = [];
+  
+  for (let i = 0; i < articles.length - 1; i++) {
+    pointsElement = articles[i].nextSibling.getElementsByClassName('score')[0];
+    points = pointsElement ? pointsElement.innerText : '0';
+    articlesArray.push({
+      title: articles[i].children[2].innerText,
+      point: parseInt(points.split(' ')[0])
+    });
+  }
+  
+  articlesArray.sort(function(a, b) {
+    return a.point - b.point;
+  });
